@@ -1,5 +1,4 @@
 
-
 const Form = ({type}) => {
     
   return (
