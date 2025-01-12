@@ -12,6 +12,7 @@ const Form = ({ type, onSubmit }) => {
 
     const handleChange = (e) => {
         const { name, value } = e.target
+        // console.log(e.target.name, e.target.value)
         setData({
             ...data,
             [name]: value
@@ -19,7 +20,7 @@ const Form = ({ type, onSubmit }) => {
     }
 
     const onFormSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault() //form submit garapaxi reload hudena
         onSubmit(data)
     }
 
