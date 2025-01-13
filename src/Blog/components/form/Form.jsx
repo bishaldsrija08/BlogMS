@@ -18,14 +18,14 @@ const Form = ({ type, onSubmit }) => {
       [name]: name === 'image' ? files[0] : value,
     }));
 
-    console.log(`${name}`, name === 'image' ? files[0] : value); // Debug log
+    // console.log(`${name}`, name === 'image' ? files[0] : value); // Debug log
   };
 
   const onFormSubmit = async (e) => {
     e.preventDefault(); // Prevent page reload
 
     // Debugging: Check the form data before submission
-    console.log('Form data submitted:', data);
+    // console.log('Form data submitted:', data);
 
     // Pass the form data to the parent function
     onSubmit(data);
@@ -45,7 +45,7 @@ const Form = ({ type, onSubmit }) => {
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             placeholder="Enter blog title"
             required
-            onClick={handleChange}
+            onChange={handleChange}
           />
         </div>
 
@@ -59,7 +59,7 @@ const Form = ({ type, onSubmit }) => {
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             placeholder="Enter blog subtitle"
             required
-            onClick={handleChange}
+            onChange={handleChange}
           />
         </div>
 
@@ -86,7 +86,7 @@ const Form = ({ type, onSubmit }) => {
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             placeholder="Enter blog category"
             required
-            onClick={handleChange}
+            onChange={handleChange}
           />
         </div>
 
@@ -100,7 +100,7 @@ const Form = ({ type, onSubmit }) => {
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             placeholder="Write a brief description of your blog post"
             required
-            onClick={handleChange}
+            onChange={handleChange}
           ></textarea>
         </div>
 

@@ -1,7 +1,26 @@
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import Layout from "../../components/Layout/Layout"
+import { baseUrl } from "../../config";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const Single = () => {
+    const { id } = useParams();
+    const [blog, setBlog] = useState({});
+
+    const fetchSingleBlog = async () => {
+        try {
+          const response = await axios.get(`${baseUrl}/blog/${id}`);
+          console.log(response.data.data)
+          setBlog(response.data.data);
+        } catch (error) {
+          alert(error);
+        }
+      };
+      useEffect(() => {
+        fetchSingleBlog();
+      }, []);
+
     return (
         <>
             <Layout>
@@ -10,7 +29,7 @@ const Single = () => {
                         <div className="flex flex-col md:flex-row -mx-4">
                             <div className="md:flex-1 px-4">
                                 <div className="h-[460px] rounded-lg bg-gray-300 dark:bg-gray-700 mb-4">
-                                    <img className="w-full h-full object-cover" src="https://cdn.pixabay.com/photo/2020/05/22/17/53/mockup-5206355_960_720.jpg" alt="Product Image" />
+                                    <img className="w-full h-full object-cover" src={blog.imageUrl} alt="Product Image" />
                                 </div>
                                 <div className="flex -mx-2 mb-4">
                                     <div className="w-1/2 px-2">
@@ -26,30 +45,22 @@ const Single = () => {
                                 </div>
                             </div>
                             <div className="md:flex-1 px-4">
-                                <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">Blog Title</h2>
+                                <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">{blog.title}</h2>
                                 <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
-                                    ante justo. Integer euismod libero id mauris malesuada tincidunt.
-                                </p>
+                                {blog.subtitle}</p>
                                 <div className="flex mb-4">
                                     <div className="mr-4">
-                                        <span className="font-bold text-gray-700 dark:text-gray-300">Category:</span>
-                                        <span className="text-gray-600 dark:text-gray-300">$29.99</span>
+                                        <span className="font-bold text-gray-700 dark:text-gray-300">Category: </span>
+                                        <span className="text-gray-600 dark:text-gray-300">{blog.category}</span>
                                     </div>
                                     <div>
                                         <span className="font-bold text-gray-700 dark:text-gray-300">Published at: </span>
-                                        <span className="text-gray-600 dark:text-gray-300">In Stock</span>
+                                        <span className="text-gray-600 dark:text-gray-300">no time</span>
                                     </div>
                                 </div>
                                 <div>
-                                    <span className="font-bold text-gray-700 dark:text-gray-300">Product Description:</span>
-                                    <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                                        sed ante justo. Integer euismod libero id mauris malesuada tincidunt. Vivamus commodo nulla ut
-                                        lorem rhoncus aliquet. Duis dapibus augue vel ipsum pretium, et venenatis sem blandit. Quisque
-                                        ut erat vitae nisi ultrices placerat non eget velit. Integer ornare mi sed ipsum lacinia, non
-                                        sagittis mauris blandit. Morbi fermentum libero vel nisl suscipit, nec tincidunt mi consectetur.
-                                    </p>
+                                    <span className="font-bold text-gray-700 dark:text-gray-300">Description:</span>
+                                    <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">{blog.description}</p>
                                 </div>
                             </div>
                         </div>
