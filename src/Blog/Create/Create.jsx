@@ -16,7 +16,8 @@ const Create = () => {
     }
     )
     // console.log(response)
-    if (response.status === 201) {
+    // console.log(response)
+    if (response.status === 200) {
       navigate("/")
     }else{
       alert("Something went wrong!")

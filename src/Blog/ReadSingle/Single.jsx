@@ -1,17 +1,31 @@
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import Layout from "../../components/Layout/Layout"
 import { baseUrl } from "../../config";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const Single = () => {
+const Single = (oldData) => {
     const { id } = useParams();
     const [blog, setBlog] = useState({});
+    const Navigate = useNavigate()
+
+    const deleteBlog = ()=>{
+       const response = axios.delete((`${baseUrl}/blog/${id}`), {
+            headers:{
+                "Authorization": localStorage.getItem('token') // verification authorization!!
+            }
+        })
+        if(response.statues === 200){
+            Navigate('/')
+        }else{
+            alert("Something went wrong!")
+        }
+    }
 
     const fetchSingleBlog = async () => {
         try {
           const response = await axios.get(`${baseUrl}/blog/${id}`);
-          console.log(response.data.data)
+         // console.log(response.data.data)
           setBlog(response.data.data);
         } catch (error) {
           alert(error);
@@ -33,12 +47,12 @@ const Single = () => {
                                 </div>
                                 <div className="flex -mx-2 mb-4">
                                     <div className="w-1/2 px-2">
-                                        <Link to="">
-                                            <button className="w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700">Delete</button>
-                                        </Link>
+                                       
+                                            <button className="w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700" onClick={deleteBlog}>Delete</button>
+                                        
                                     </div>
                                     <div className="w-1/2 px-2">
-                                        <Link to="/blog/update/">
+                                        <Link to={`/blog/update/${blog._id}`}>
                                             <button className="w-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white py-2 px-4 rounded-full font-bold hover:bg-gray-300 dark:hover:bg-gray-600">Edit</button>
                                         </Link>
                                     </div>
