@@ -9,7 +9,7 @@ const Create = () => {
   const onAddBlog = async (data) => {
 
     const response = axios.post(`${baseUrl}/blog`, data, {
-      headers: { 
+      headers: {
         "Content-Type": "multipart/form-data", //form pathauda
         "Authorization": localStorage.getItem('token') // verification authorization!!
       }
@@ -19,7 +19,7 @@ const Create = () => {
     // console.log(response)
     if (response.status === 200) {
       navigate("/")
-    }else{
+    } else {
       alert("Something went wrong!")
     }
   }

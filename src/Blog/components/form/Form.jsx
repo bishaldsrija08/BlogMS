@@ -1,12 +1,12 @@
 import { useState } from "react"
 
-const Form = ({ type, onSubmit, oldData, onUpdate }) => {
+const Form = ({ type, onSubmit }) => {
   const [data, setData] = useState({
-    title: oldData.title,
-    subtitle: oldData.subtitle,
+    title: '',
+    subtitle: '',
     image: null, // Initialize as null for file input
-    category: oldData.category,
-    description: oldData.description,
+    category: '',
+    description: '',
   });
 
   const handleChange = (e) => {
@@ -28,8 +28,8 @@ const Form = ({ type, onSubmit, oldData, onUpdate }) => {
     // console.log('Form data submitted:', data);
 
     // Pass the form data to the parent function
-    // onSubmit(data);
-    onUpdate(data)
+    onSubmit(data);
+
   };
 
   return (
@@ -46,7 +46,6 @@ const Form = ({ type, onSubmit, oldData, onUpdate }) => {
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             placeholder="Enter blog title"
             required
-            value={data.title}
             onChange={handleChange}
           />
         </div>
@@ -61,7 +60,6 @@ const Form = ({ type, onSubmit, oldData, onUpdate }) => {
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             placeholder="Enter blog subtitle"
             required
-            value={data.subtitle}
             onChange={handleChange}
           />
         </div>
@@ -74,8 +72,7 @@ const Form = ({ type, onSubmit, oldData, onUpdate }) => {
             id="image"
             name="image"
             className="mt-1 block w-full text-sm text-gray-500 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-            // required
-            onChange={handleChange}
+            required
           />
         </div>
 
@@ -89,7 +86,6 @@ const Form = ({ type, onSubmit, oldData, onUpdate }) => {
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             placeholder="Enter blog category"
             required
-            value={data.category}
             onChange={handleChange}
           />
         </div>
@@ -104,7 +100,6 @@ const Form = ({ type, onSubmit, oldData, onUpdate }) => {
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             placeholder="Write a brief description of your blog post"
             required
-            value={data.description}
             onChange={handleChange}
           ></textarea>
         </div>

@@ -4,7 +4,7 @@ import { baseUrl } from "../../config";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const Single = (oldData) => {
+const Single = () => {
     const { id } = useParams();
     const [blog, setBlog] = useState({});
     const Navigate = useNavigate()
